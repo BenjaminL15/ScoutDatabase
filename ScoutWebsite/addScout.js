@@ -14,4 +14,4 @@ nextButton.addEventListener("click", ()=> {
 })
 
 
-nextButton.addEventListener("click", ()=> form.classList.remove('secActive')); 
+backButton.addEventListener("click", ()=> form.classList.remove('secActive')); 

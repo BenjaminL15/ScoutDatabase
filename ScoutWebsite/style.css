@@ -70,14 +70,30 @@ body{
     margin-top: 16px;
     min-height: 490px;
     background-color: #fff;
+    /* overflow: hidden; */
 }
 
-.container form .details{
-    margin-top: 30px;
+.container form .form{
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
 }
 
-.container form .details.parents{
-    margin-top: 10px;
+.container form .form.second{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+
+form.secActive .form.second {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0%);
+}
+
+form.secActive .form.first {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .container form .title {
@@ -131,6 +147,13 @@ form .fields .input-field {
 
 .input-field input[type="date"]:valid {
     color: #333;
+}
+
+#primary-contact {
+    width: 15px; 
+    height: 15px; 
+    transform: scale(1.5); 
+    margin-right: 20px; 
 }
 
 .container form button, .backButton {
