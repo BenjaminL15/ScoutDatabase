@@ -145,7 +145,7 @@ body{
 .container form .form{
     position: absolute;
     background-color: #fff;
-    transition: 0.3s ease;
+    transition: 0.7s ease-in-out;
 }
 
 .container form .form.second{
