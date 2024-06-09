@@ -396,3 +396,74 @@ form .buttons button, .backButton{
 
 
 /* Awards */
+
+
+
+/* view scouts */
+.scout-info {
+    margin-top: 30px;
+}
+
+.scout-info table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.scout-info table th,
+.scout-info table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.scout-info table th {
+    background-color: #f4f4f4;
+    font-weight: 600;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    flex: 0.25;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+}
+
+.search-container button:hover {
+    background-color: #333;
+}
+
+.search-container button:focus {
+    outline: none;
+}
+
+.viewBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(WelcomePageImage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    z-index: -1;
+    filter: blur(5px);
+}
