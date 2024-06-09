@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title> Scout Database </title>
+        <link rel="stylesheet" href="style.css">
+        <script src="attendance.js"></script>
+    </head>
+    
+    <body>
+        <div class="container">
+            <header> Meeting Attendance </header>
+            <form action="#">
+                <div class="attendance first">
+                    <div class="Mark Attendance">
+                        <span class="title"> Scout Attendance </span>
+                        <div class="fields">
+                            <div class="input-field">
+                                <label>Meeting Date</label>
+                                <input type="date" required>
+                            </div>
+                        </div>
+                        <!-- <button type="button" class="showButton" onclick="toggleDatabaseView()">
+                            <span class="buttonText">Show Scouts</span>
+                        </button>  -->
+                    </div>
+                </div>
+
+            <!-- PLACEHOLDER FOR WHEN WE ACTUALLY CONNECT THE DATABASE, THIS IS A PLACEHOLDER FOR NOW -->
+            <div id="databaseView">
+                <h2>Scouts (Placeholder)</h2>
+                <p class="placeholder">This is placeholder data until the database is ready.</p>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Attended</th>
+                    </tr>
+                    <tr>
+                        <td class="placeholder">Ben Lee</td>
+                        <td><input type="checkbox" name="attended" value="John Doe" disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="placeholder">Brian Lai</td>
+                        <td><input type="checkbox" name="attended" value="Jane Smith" disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="placeholder">Bianca Jewett</td>
+                        <td><input type="checkbox" name="attended" value="Jane Smith" disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="placeholder">Husnain Choudhry</td>
+                        <td><input type="checkbox" name="attended" value="Jane Smith" disabled></td>
+                    </tr>
+                </table>
+                <button type="submit" class="addButton" disabled>
+                    <span class="buttonText">Submit Attendance</span>
+                </button>
+            </div>
+            </form>
+            </div>
+        <div class="meetingBackground"></div>
+    </body>
+
+</html>

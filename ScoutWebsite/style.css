@@ -358,8 +358,24 @@ form .buttons button, .backButton{
 
 /* Attendance */
 
+.placeholder {
+    color: gray;
+    font-style: italic;
+}
 
-
+.meetingBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(WelcomePageImage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    z-index: -1;
+    filter: blur(5px);
+}
 
 
 
