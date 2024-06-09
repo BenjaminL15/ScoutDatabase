@@ -1,3 +1,6 @@
+
+// Edit the code so that it will parse the text and check for both first and last name at the same time 
+
 function searchScout() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchInput");
