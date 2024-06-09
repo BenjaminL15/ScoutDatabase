@@ -376,6 +376,44 @@ form .buttons button, .backButton{
     font-style: italic;
 }
 
+/* Attendance table styles */
+#databaseView table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#databaseView th,
+#databaseView td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#databaseView th {
+    background-color: #f4f4f4;
+    font-weight: 600;
+}
+
+#databaseView tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#databaseView tr:hover {
+    background-color: #ddd;
+}
+
+#databaseView input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+    width: auto;
+}
+
+.addButton {
+    margin-top: 20px;
+}
+
+
 .meetingBackground {
     position: fixed;
     top: 0;
