@@ -448,10 +448,21 @@ form .buttons button, .backButton{
     filter: blur(5px);
 }
 
+/* Add volunteer */
 
+#parent {
+    width: 15px; 
+    height: 15px; 
+    transform: scale(1.5); 
+    margin-right: 20px; 
+}
 
-
-
+#counselor {
+    width: 15px; 
+    height: 15px; 
+    transform: scale(1.5); 
+    margin-right: 20px; 
+}
 
 
 /* Attendance */
@@ -500,7 +511,6 @@ form .buttons button, .backButton{
 .addButton {
     margin-top: 20px;
 }
-
 
 
 .meetingBackground {
@@ -592,6 +602,45 @@ form .buttons button, .backButton{
     filter: blur(5px);
 }
 
+/* add awards */
+
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#awardSearchInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#awardDropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#awardDropdown option {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#awardDropdown option:last-child {
+    border-bottom: none;
+}
+
+#awardDropdown:focus {
+    outline: none;
+}
+
 
 
 /* view scouts */
@@ -639,6 +688,7 @@ form .buttons button, .backButton{
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 5px;
+    margin-bottom: 18px;
 }
 
 .search-container button:hover {
