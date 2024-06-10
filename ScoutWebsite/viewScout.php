@@ -1,3 +1,13 @@
+<?php
+    require_once('db.php');
+    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, p.PARENT_FNAME, p.PARENT_LNAME, p.PARENTPHONE 
+        FROM SCOUTS s 
+        LEFT JOIN PARENTS p ON s.SCOUTID = p.SCOUTID
+        LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID AND p.PARENTID = sp.PARENTID
+        WHERE sp.CONTACT_PRIORITY = 1";
+    $result = mysqli_query($conn, $sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scout Details</title>
     <link rel="stylesheet" href="style.css">
+    <script src="viewScout.js"></script>
 </head>
 
 <body>
@@ -28,11 +39,24 @@
                     <th>Parent's Last Name</th>
                     <th>Parent's Phone Number</th>
                 </tr>
+                <?php
+                    while($row = mysqli_fetch_assoc($result))
+                    {
+                ?>      
+                    <td><?php echo $row['FIRSTNAME']; ?></td>
+                    <td><?php echo $row['LASTNAME']; ?></td>
+                    <td><?php echo $row['SCOUT_RANK']; ?></td>
+                    <td><?php echo $row['SCOUT_BIRTHDAY']; ?></td>
+                    <td><?php echo $row['PARENT_FNAME']; ?></td>
+                    <td><?php echo $row['PARENT_LNAME']; ?></td>
+                    <td><?php echo $row['PARENTPHONE']; ?></td>
+                </tr>
+                <?php
+                    }  
+                ?>
             </table>
         </div>
     </div>
-    <script src="viewScout.js"></script>
-    <script src="fetch_scouts.js"></script>
     <div class="viewBackground"></div>
 </body>
 
