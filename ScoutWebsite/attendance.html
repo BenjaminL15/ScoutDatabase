@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width", initial-scale="1.0">
-        <title> Meeting </title>
-        <link rel="stylesheet" href="style.css">
-        <script src="attendance.js"></script>
-    </head>
-    
-    <body>
-        <div class="container">
-            <header> Meeting </header>
-            <form action="#">
-                <div class="attendance first">
-                    <div class="Mark Attendance">
-                        <span class="title"> Scout Attendance </span>
-                        <div class="fields">
-                            <div class="input-field">
-                                <label>Meeting Date</label>
-                                <input type="date" required>
-                            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <title>Meeting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>Meeting</header>
+        <form action="#">
+            <div class="attendance first">
+                <div class="Mark Attendance">
+                    <span class="title">Scout Attendance</span>
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Meeting Date</label>
+                            <input type="date" required>
                         </div>
-                        <!-- <button type="button" class="showButton" onclick="toggleDatabaseView()">
-                            <span class="buttonText">Show Scouts</span>
-                        </button>  -->
                     </div>
                 </div>
+            </div>
 
-            <!-- PLACEHOLDER FOR WHEN WE ACTUALLY CONNECT THE DATABASE, THIS IS A PLACEHOLDER FOR NOW -->
+            <!-- Placeholder table for scouts -->
             <div id="databaseView">
-                <span class="title"> Scouts </span>
-                <p class="placeholder">This is placeholder data until the database is ready.</p>
-                <table>
+                <span class="title">Scouts</span>
+                <input type="text" id="searchInput" onkeyup="searchScouts()" placeholder="Search for scouts...">
+                <table id="scoutsTable">
                     <tr>
                         <th>Name</th>
                         <th>Attended</th>
@@ -59,9 +53,8 @@
                     <span class="buttonText">Submit Attendance</span>
                 </button>
             </div>
-            </form>
-            </div>
-        <div class="meetingBackground"></div>
-    </body>
-
+        </form>
+    </div>
+    <div class="meetingBackground"></div>
+</body>
 </html>

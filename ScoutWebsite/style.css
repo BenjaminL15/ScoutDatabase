@@ -456,12 +456,15 @@ form .buttons button, .backButton{
 
 /* Attendance */
 
-.placeholder {
-    color: gray;
-    font-style: italic;
+#searchInput {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Attendance table styles */
 #databaseView table {
     width: 100%;
     border-collapse: collapse;
@@ -497,6 +500,7 @@ form .buttons button, .backButton{
 .addButton {
     margin-top: 20px;
 }
+
 
 
 .meetingBackground {
