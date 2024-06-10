@@ -52,7 +52,7 @@
                     <td><?php echo $row['PARENTPHONE']; ?></td>
                 </tr>
                 <?php
-                    }  
+                    }  mysqli_close($conn);
                 ?>
             </table>
         </div>
@@ -61,3 +61,5 @@
 </body>
 
 </html>
+
+
