@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
     
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width", initial-scale="1.0">
-        <title> Welcome </title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <title> Welcome </title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
-        <div class="wrapper">
-            <form action="">
-                <h1>Welcome!</h1>
-                <h2>What do you need to do?</h2>
-                <div class="buttons-option">
-                    <a href="ScoutAdd.html" class="add"> Add Scout </a>
-                    <a href="attendance.html" class="meeting"> Attendance </a>
-                    <a href="volunteer.html" class="AV"> Volunteers </a>
-                    <a href="award.html" class="Award"> Awards </a>
-                    <a href="viewScout.html" class="View"> View Scouts </a>
+<body>
+    <div class="wrapper">
+        <form action="">
+            <h1>Welcome!</h1>
+            <h2>What do you need to do?</h2>
+            <div class="buttons-option">
+                <div class="dropdown">
+                    <button class="dropbtn">Scouts</button>
+                    <div class="dropdown-content">
+                        <a href="ScoutAdd.html">Add Scout</a>
+                        <a href="viewScout.html">View Scouts</a>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="welcomeBackground"></div>
-    </body>
+                <div class="dropdown">
+                    <button class="dropbtn">Volunteers</button>
+                    <div class="dropdown-content">
+                        <a href="addVolunteers.html">Add Volunteers</a>
+                        <a href="volunteer.html">View Volunteers</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Awards</button>
+                    <div class="dropdown-content">
+                        <a href="award.html">Add Awards</a>
+                        <a href="viewAwards.html">View Awards</a>
+                    </div>
+                </div>
+                <a href="attendance.html" class="meeting"> Attendance </a>
+            </div>
+        </form>
+    </div>
+    <div class="welcomeBackground"></div>
+</body>
 </html>
