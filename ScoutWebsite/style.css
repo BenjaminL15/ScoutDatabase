@@ -347,6 +347,23 @@ form .buttons button, .backButton{
     margin-right: 14px;
 }
 
+.input-field select {
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+    width: 100%; /* Make the dropdown full-width */
+}
+
+.input-field select:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
 /* .scoutBackground {
     position: fixed;
     top: 0;
