@@ -33,7 +33,7 @@
                     <button class="dropbtn">Awards</button>
                     <div class="dropdown-content">
                         <a href="award.html">Add Awards</a>
-                        <a href="viewAwards.html">View Awards</a>
+                        <a href="viewAwards.php">View Awards</a>
                     </div>
                 </div>
                 <div class="dropdown">

@@ -1,6 +1,6 @@
 <?php
     require_once('db.php');
-    $sql = "SELECT s.SCOUTID, s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, p.PARENT_FNAME, p.PARENT_LNAME, p.PARENTPHONE 
+    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, p.PARENT_FNAME, p.PARENT_LNAME, p.PARENTPHONE 
         FROM SCOUTS s 
         LEFT JOIN PARENTS p ON s.SCOUTID = p.SCOUTID
         LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID AND p.PARENTID = sp.PARENTID
@@ -38,29 +38,21 @@
                     <th>Parent's First Name</th>
                     <th>Parent's Last Name</th>
                     <th>Parent's Phone Number</th>
-                    <th>Actions</th> <!-- New column for actions -->
                 </tr>
                 <?php
                     while($row = mysqli_fetch_assoc($result))
                     {
                 ?>      
-                    <tr>
-                        <td><?php echo $row['FIRSTNAME']; ?></td>
-                        <td><?php echo $row['LASTNAME']; ?></td>
-                        <td><?php echo $row['SCOUT_RANK']; ?></td>
-                        <td><?php echo $row['SCOUT_BIRTHDAY']; ?></td>
-                        <td><?php echo $row['PARENT_FNAME']; ?></td>
-                        <td><?php echo $row['PARENT_LNAME']; ?></td>
-                        <td><?php echo $row['PARENTPHONE']; ?></td>
-                        <td>
-                        <button class="edit-btn" onclick="editScout(<?php echo $row['SCOUTID']; ?>)">Edit</button>
-                        <button class="delete-btn" onclick="deleteScout(<?php echo $row['SCOUTID']; ?>)">Delete</button>
-
-                        </td>
-                    </tr>
+                    <td><?php echo $row['FIRSTNAME']; ?></td>
+                    <td><?php echo $row['LASTNAME']; ?></td>
+                    <td><?php echo $row['SCOUT_RANK']; ?></td>
+                    <td><?php echo $row['SCOUT_BIRTHDAY']; ?></td>
+                    <td><?php echo $row['PARENT_FNAME']; ?></td>
+                    <td><?php echo $row['PARENT_LNAME']; ?></td>
+                    <td><?php echo $row['PARENTPHONE']; ?></td>
+                </tr>
                 <?php
-                    }  
-                    mysqli_close($conn);
+                    }  mysqli_close($conn);
                 ?>
             </table>
         </div>
@@ -69,3 +61,5 @@
 </body>
 
 </html>
+
+
