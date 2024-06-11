@@ -23,7 +23,6 @@
                 </div>
             </div>
 
-            <!-- Placeholder table for scouts -->
             <div id="databaseView">
                 <span class="title">Scouts</span>
                 <input type="text" id="searchInput" onkeyup="searchScouts()" placeholder="Search for scouts...">
