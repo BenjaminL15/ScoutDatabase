@@ -27,8 +27,6 @@
                     </div>
                 </div>
             </div>
-    
-            <!-- Placeholder table for scouts -->
             <div id="databaseView">
                 <span class="title">Scouts</span>
                 <input type="text" id="searchInput" onkeyup="searchScouts()" placeholder="Search for scouts...">
@@ -36,10 +34,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Award Recieved</th>
-                    </tr>
-                    <tr>
-                        <td class="placeholder">Ben Lee</td>
-                        <td><input type="checkbox" name="recieved" value="John Doe"></td>
                     </tr>
                 </table>
                 <button type="submit" class="addButton" disabled>
