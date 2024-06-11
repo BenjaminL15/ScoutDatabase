@@ -738,10 +738,7 @@ form .buttons button, .backButton{
     outline: none;
 }
 
-.actions {
-    display: flex;
-    gap: 10px;
-}
+/* Add these styles to your existing CSS */
 
 .actions .edit-btn,
 .actions .delete-btn {
@@ -769,6 +766,7 @@ form .buttons button, .backButton{
 .actions .delete-btn:hover {
     background-color: #333;
 }
+
 
 .viewBackground {
     position: fixed;
