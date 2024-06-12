@@ -1,3 +1,18 @@
+<?php
+    $db = new SQLite3('DatabaseCreator.db');
+
+    $sql = "SELECT AWARDS.AWARDNAME, SCOUTS.FIRSTNAME, SCOUTS.LASTNAME, MEMBER_AWARDS.DATE_AWARDED
+        FROM MEMBER_AWARDS 
+        JOIN SCOUTS ON MEMBER_AWARDS.SCOUTID = SCOUTS.SCOUTID 
+        JOIN AWARDS ON MEMBER_AWARDS.AWARDID = AWARDS.AWARDID";
+    $result = $db->query($sql);
+
+    $awards = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $awards[] = $row;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,34 +33,31 @@
                 <button onclick="searchAward()">Search</button>
             </div>
             <h2>Awards Information</h2>
-            <!-- Placeholder for awards data -->
-            <p class="placeholder">This is placeholder data until the database is ready.</p>
-
-            <!-- Table to display awards and scouts -->
-            <table>
+            <table id="awardsTable">
                 <tr>
                     <th>Award</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Date Achieved</th>
                 </tr>
-                <!-- Placeholder data -->
-                <tr>
-                    <td class="placeholder">Eagle Scout</td>
-                    <td class="placeholder">Ben</td>
-                    <td class="placeholder">Lee</td>
-                    <td class="placeholder">2023-05-12</td>
-                </tr>
-                <tr>
-                    <td class="placeholder">Life Scout</td>
-                    <td class="placeholder">Brian</td>
-                    <td class="placeholder">Lai</td>
-                    <td class="placeholder">2023-10-15</td>
-                </tr>
+                <?php if (!empty($awards)): ?>
+                    <?php foreach ($awards as $award): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($award['AWARDNAME']); ?></td>
+                            <td><?php echo htmlspecialchars($award['FIRSTNAME']); ?></td>
+                            <td><?php echo htmlspecialchars($award['LASTNAME']); ?></td>
+                            <td><?php echo htmlspecialchars($award['DATE_AWARDED']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="7">No award information available.</td>
+                    </tr>
+                <?php endif; ?>
             </table>
         </div>
     </div>
-    <script src="viewAwards.js"></script>
+    <script src="viewAward.js"></script>
     <div class="viewBackground"></div>
 </body>
 
