@@ -7,20 +7,22 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $meetingDate = $_POST['meeting_date'];
         $attendance = $_POST['attendance'];
-
+    
         $db->exec("INSERT INTO MEETING (MEETINGDATE) VALUES ('$meetingDate')");
         $meetingID = $db->lastInsertRowID();
-
-        foreach ($attendance as $scoutID => $attended) {
-            $attendedValue = $attended === 'on' ? 1 : 0;
+    
+        foreach ($attendance as $scoutID => $attendanceData) {
+            $attendedValue = isset($attendanceData['attended']) ? (int)$attendanceData['attended'] : 0;
+    
             $db->exec("INSERT INTO MEETING_SCOUT (MEETINGID, SCOUTID, ATTENDANCE) VALUES ($meetingID, $scoutID, $attendedValue)");
         }
-
+    
         $successMessage = 'Attendance successfully recorded.';
-
+    
         header("Location: {$_SERVER['PHP_SELF']}");
         exit(); 
     }
+    
 
     $sql = "SELECT SCOUTID, FIRSTNAME, LASTNAME FROM SCOUTS"; 
     $result = $db->query($sql);
@@ -67,13 +69,15 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Attended</th>
+                        <th>Not Attended</th>
                     </tr>
                     <?php if (!empty($scouts)): ?>
                         <?php foreach ($scouts as $scout): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($scout['FIRSTNAME']); ?></td>
                                 <td><?php echo htmlspecialchars($scout['LASTNAME']); ?></td>
-                                <td><input type="checkbox" name="attendance[<?php echo $scout['SCOUTID']; ?>]"></td>
+                                <td><input type="checkbox" name="attendance[<?php echo $scout['SCOUTID']; ?>][attended]" value="1"> Yes</td>
+                                <td><input type="checkbox" name="attendance[<?php echo $scout['SCOUTID']; ?>][attended]" value="0"> No</td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
