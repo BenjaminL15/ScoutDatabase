@@ -44,6 +44,6 @@
     </div>
     
     <div class="meetingBackground"></div>
-    <script src="award.js"></script>
+    <script src="js/award.js"></script>
 </body>
 </html>
