@@ -18,29 +18,29 @@
                 <div class="dropdown">
                     <button class="dropbtn">Scouts</button>
                     <div class="dropdown-content">
-                        <a href="ScoutAdd.html">Add Scout</a>
-                        <a href="viewScout.html">View Scouts</a>
+                        <a href="ScoutAdd.php">Add Scout</a>
+                        <a href="viewScout.php">View Scouts</a>
                     </div>
                 </div>
                 <div class="dropdown">
                     <button class="dropbtn">Volunteers</button>
                     <div class="dropdown-content">
-                        <a href="addVolunteers.html">Add Volunteers</a>
-                        <a href="volunteer.html">View Volunteers</a>
+                        <a href="addVolunteers.php">Add Volunteers</a>
+                        <a href="volunteer.php">View Volunteers</a>
                     </div>
                 </div>
                 <div class="dropdown">
                     <button class="dropbtn">Awards</button>
                     <div class="dropdown-content">
-                        <a href="award.html">Add Awards</a>
-                        <a href="viewAwards.html">View Awards</a>
+                        <a href="award.php">Add Awards</a>
+                        <a href="viewAwards.php">View Awards</a>
                     </div>
                 </div>
                 <div class="dropdown">
                     <button class="dropbtn">Attendance</button>
                     <div class="dropdown-content">
-                        <a href="attendance.html">Add Attendance</a>
-                        <a href="viewAttendance.html">View Attendance</a>
+                        <a href="attendance.php">Add Attendance</a>
+                        <a href="viewAttendance.php">View Attendance</a>
                     </div>
                 </div>
             </div>
