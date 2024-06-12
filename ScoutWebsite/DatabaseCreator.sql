@@ -153,7 +153,8 @@ INSERT INTO SCOUT_PARENT (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY
 -- Create ADULT_VOLUNTEERS table
 CREATE TABLE ADULT_VOLUNTEERS (
     ADULT_VOLID INT IDENTITY(1,1),
-    PARENTID INT,
+    PARENTID INT NULL,
+    COUNSELOR_ID INT NULL,
     AVFNAME VARCHAR(25),
     AVLNAME VARCHAR(25),
     AVPHONE VARCHAR(25),
@@ -161,77 +162,75 @@ CREATE TABLE ADULT_VOLUNTEERS (
     AVSTATE VARCHAR(25),
     AVZIP VARCHAR(25),
     PRIMARY KEY (ADULT_VOLID),
-    FOREIGN KEY (PARENTID) REFERENCES PARENTS(PARENTID)
+    FOREIGN KEY (PARENTID) REFERENCES PARENTS(PARENTID),
+    FOREIGN KEY (COUNSELOR_ID) REFERENCES MERITBADGE_COUNSELOR(COUNSELOR_ID)
 );
 
 -- Insert data into ADULT_VOLUNTEERS table
-INSERT INTO ADULT_VOLUNTEERS (ADULT_VOLID, PARENTID, AVFNAME, AVLNAME, AVPHONE, AVADDRESS, AVSTATE, AVZIP) VALUES
-('1', '1', 'Husnain', 'Choudhry', '703-111-1111', 'Charlottesville, Montebello', 'Virginia', '22903'),
-('2', '4', 'Justin', 'Lai', '703-111-1111', '3452 Montebello Way', 'Virginia', '22903'),
-('3', '5', 'Duke', 'Nguyen', '703-111-1111', '8943 Montebello Street', 'Virginia', '22903'),
-('4', '2', 'Bianca', 'Jewett', '703-111-1111', '5455 Bristow Street', 'Virginia', '22903'),
-('5', '3', 'Bryan', 'Lie', '703-111-1111', '5656 Springfield Ave', 'Virginia', '22903');
+INSERT INTO ADULT_VOLUNTEERS (ADULT_VOLID, PARENTID, COUNSELOR_ID, AVFNAME, AVLNAME, AVPHONE, AVADDRESS, AVSTATE, AVZIP) VALUES
+('1', '1', NULL,'Husnain', 'Choudhry', '703-111-1111', 'Charlottesville, Montebello', 'Virginia', '22903'),
+('2', NULL, NULL,'Justin', 'Lai', '703-111-1111', '3452 Montebello Way', 'Virginia', '22903'),
+('3', NULL, NULL, 'Duke', 'Nguyen', '703-111-1111', '8943 Montebello Street', 'Virginia', '22903'),
+('4', '2', '2', 'Bianca', 'Jewett', '703-111-1111', '5455 Bristow Street', 'Virginia', '22903'),
+('5', '3', '4', 'Bryan', 'Lai', '703-111-1111', '5656 Springfield Ave', 'Virginia', '22903');
 
 -- Create MERITBADGE_COUNSELOR table
 CREATE TABLE MERITBADGE_COUNSELOR (
-    MERITBADGE_COUNSELORID INT IDENTITY(1,1),
-    CO_FNAME VARCHAR(25),
-    CO_LNAME VARCHAR(25),
-    COPHONE VARCHAR(25),
-    COADDRESS VARCHAR(35),
-    COSTATE VARCHAR(25),
-    COZIP VARCHAR(25),
-    PRIMARY KEY (MERITBADGE_COUNSELORID)
+	COUNSELOR_ID	INT IDENTITY(1,1),
+	ADULT_VOLID	INT,
+	COUNSELOR_FNAME	VARCHAR(25),
+	COUNSELOR_LNAME	VARCHAR(25),
+	BADGE_NAME	VARCHAR(100),
+	PRIMARY KEY(COUNSELOR_ID),
+	FOREIGN KEY(ADULT_VOLID) REFERENCES ADULT_VOLUNTEERS(ADULT_VOLID),
+	FOREIGN KEY(BADGE_NAME) REFERENCES BADGES(BADGE_NAME)
 );
 
 -- Insert data into MERITBADGE_COUNSELOR table
-INSERT INTO MERITBADGE_COUNSELOR (MERITBADGE_COUNSELORID, CO_FNAME, CO_LNAME, COPHONE, COADDRESS, COSTATE, COZIP) VALUES
-('1', 'Michael', 'Smith', '703-345-1111', '123 Counselor St', 'Virginia', '22903'),
-('2', 'Sarah', 'Johnson', '703-456-1111', '456 Mentor Ave', 'Virginia', '22903'),
-('3', 'John', 'Doe', '703-567-1111', '789 Advisor Blvd', 'Virginia', '22903'),
-('4', 'Jane', 'Roe', '703-678-1111', '321 Guidance Ln', 'Virginia', '22903'),
-('5', 'James', 'Black', '703-789-1111', '654 Support Rd', 'Virginia', '22903');
+INSERT INTO MERITBADGE_COUNSELOR (COUNSELOR_ID, ADULT_VOLID, COUNSELOR_FNAME, COUNSELOR_LNAME, BADGE_NAME) VALUES
+('1', '1', 'Husnain', 'Choudhry', 'Swimming'),
+('2', '4', 'Bianca', 'Jewett', 'Computer Programming'),
+('3', '4', 'Bianca', 'Jewett', 'Art'),
+('4', '5', 'Brian', 'Lai', 'First Aid'),
+('5', '5', 'Brian', 'Lai', 'Healthcare Professions');
 
 -- Create COUNSELOR_BADGE table
 CREATE TABLE COUNSELOR_BADGE (
-    COUNSELORID INT,
-    BADGEID INT,
-    PRIMARY KEY (COUNSELORID, BADGEID),
-    FOREIGN KEY (COUNSELORID) REFERENCES MERITBADGE_COUNSELOR(MERITBADGE_COUNSELORID),
-    FOREIGN KEY (BADGEID) REFERENCES BADGES(BADGEID)
+	COUNSELOR_ID		INT,
+	BADGE_NAME		VARCHAR(25),
+	PRIMARY KEY(COUNSELOR_ID, BADGE_NAME),
+	FOREIGN KEY(COUNSELOR_ID) REFERENCES MERITBADGE_COUNSELOR(COUNSELOR_ID),
+	FOREIGN KEY(BADGE_NAME) REFERENCES BADGES(BADGE_NAME)
 );
 
 -- Insert data into COUNSELOR_BADGE table
-INSERT INTO COUNSELOR_BADGE (COUNSELORID, BADGEID) VALUES
-('1', '1'),
-('1', '2'),
-('2', '3'),
-('2', '4'),
-('3', '5'),
-('4', '6'),
-('4', '7'),
-('5', '8'),
-('5', '9');
+INSERT INTO COUNSELOR_BADGE (COUNSELOR_ID, BADGE_NAME) VALUES
+    ('1', 'Swimming'),
+    ('2', 'Computer Programming'),
+    ('3', 'Art'),
+    ('4', 'First Aid'),
+    ('5', 'Healthcare Professions');
+
 
 -- Create BADGES table
 CREATE TABLE BADGES (
-    BADGEID INT IDENTITY(1,1),
-    BADGENAME VARCHAR(25),
-    BADGE_DESC VARCHAR(255),
-    PRIMARY KEY (BADGEID)
+	BADGE_NAME	VARCHAR(25),
+	BADGE_DESC	VARCHAR(25),
+	EAGLE_REC	BIT,
+	PRIMARY KEY(BADGE_NAME)
 );
 
 -- Insert data into BADGES table
-INSERT INTO BADGES (BADGEID, BADGENAME, BADGE_DESC) VALUES
-('1', 'Citizenship in the Community', 'Learn the rights, duties, and obligations of citizenship.'),
-('2', 'Citizenship in the Nation', 'Understand your national government.'),
-('3', 'Citizenship in the World', 'Learn about global citizenship.'),
-('4', 'Communication', 'Develop your communication skills.'),
-('5', 'Cooking', 'Learn to cook meals outdoors.'),
-('6', 'First Aid', 'Know the basics of first aid.'),
-('7', 'Camping', 'Learn the essentials of camping.'),
-('8', 'Personal Fitness', 'Develop a personal fitness plan.'),
-('9', 'Emergency Preparedness', 'Prepare for emergency situations.');
+INSERT INTO BADGES (BADGE_NAME, BADGE_DESC, EAGLE_REC) VALUES
+    ('First Aid', 'Earning the badge', 1),
+    ('Art', 'Earning the badge', 0),
+    ('Swimming', 'Earning the badge', 1),
+    ('Healthcare Professions', 'Earning the badge', 0),
+    ('Chemistry', 'Earning the badge', 0),
+    ('Computer Programming', 'Earning the badge', 0),
+    ('Hiking', 'Earning the badge', 1),
+    ('Cooking', 'Earning the badge', 1);
+
 
 -- Create AWARDS table
 CREATE TABLE AWARDS (
@@ -361,23 +360,21 @@ INSERT INTO MEMBER_AWARDS (SCOUTID, AWARDID, DATE_AWARDED) VALUES
 
 -- Create MEMBERS_BADGES table
 CREATE TABLE MEMBERS_BADGES (
-    SCOUTID INT,
-    BADGEID INT,
-    DATE_EARNED DATE,
-    PRIMARY KEY (SCOUTID, BADGEID),
-    FOREIGN KEY (SCOUTID) REFERENCES SCOUTS(SCOUTID),
-    FOREIGN KEY (BADGEID) REFERENCES BADGES(BADGEID)
+	SCOUTID		INT IDENTITY(1,1),
+	BADGE_NAME	VARCHAR(25),
+	COMPLETE_DATE	DATETIME,
+	COMP_STATUS	VARCHAR(25),
+	PRIMARY KEY(SCOUTID, BADGE_NAME),
+	FOREIGN KEY(SCOUTID) REFERENCES SCOUTS(SCOUTID),
+	FOREIGN KEY(BADGE_NAME) REFERENCES BADGES(BADGE_NAME),
+    UNIQUE (SCOUTID, BADGE_NAME)
 );
 
 -- Insert data into MEMBERS_BADGES table
-INSERT INTO MEMBERS_BADGES (SCOUTID, BADGEID, DATE_EARNED) VALUES
-('1', '1', '2022-03-01'),
-('2', '2', '2022-04-01'),
-('3', '3', '2022-05-01'),
-('4', '4', '2022-06-01'),
-('5', '5', '2022-07-01'),
-('6', '6', '2022-08-01'),
-('7', '7', '2022-09-01'),
-('8', '8', '2022-10-01'),
-('9', '9', '2022-11-01'),
-('10', '1', '2022-12-01');
+INSERT INTO MEMBERS_BADGES (SCOUTID, BADGE_NAME, COMPLETE_DATE, COMP_STATUS) VALUES
+    ('1', 'Swimming', '2025-6-2', 'Complete'),
+    ('2', 'Art', '2025-6-2', 'Incomplete'),
+    ('3', 'Swimming', '2025-6-2', 'In-progress'),
+    ('1', 'First Aid', '2025-6-2', 'Complete'),
+    ('4', 'Art', '2025-6-2', 'Complete');
+
