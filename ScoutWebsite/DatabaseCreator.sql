@@ -303,7 +303,7 @@ INSERT INTO AWARDS (AWARDID, AWARDNAME) VALUES
 ('61', 'Professional Fellowship Honor'),
 ('62', 'Recruiter Strip Award'),
 ('63', 'Religious Emblems Awards Program'),
-('64', 'iScouting…Vale la Pena! Service Award'),
+('64', 'iScouting...Vale la Pena! Service Award'),
 ('65', 'Scholarships'),
 ('66', 'Scouter’s Key Award'),
 ('67', 'Scouter’s Training Award'),

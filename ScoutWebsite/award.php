@@ -1,13 +1,23 @@
 <?php
+    // Establish connection to SQLite database
     $db = new SQLite3('DatabaseCreator.db');
 
-    $sql = "SELECT FIRSTNAME, LASTNAME
-        FROM SCOUTS"; 
-    $result = $db->query($sql);
+    // Query to fetch scouts data
+    $sql_scouts = "SELECT FIRSTNAME, LASTNAME FROM SCOUTS"; 
+    $result_scouts = $db->query($sql_scouts);
 
     $scouts = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    while ($row = $result_scouts->fetchArray(SQLITE3_ASSOC)) {
         $scouts[] = $row;
+    }
+
+    // Query to fetch awards data
+    $sql_awards = "SELECT AWARDID, AWARDNAME FROM AWARDS"; 
+    $result_awards = $db->query($sql_awards);
+
+    $awards = [];
+    while ($row = $result_awards->fetchArray(SQLITE3_ASSOC)) {
+        $awards[] = $row;
     }
 ?>
 
@@ -37,7 +47,7 @@
                     </div>
                     <div class="fields">
                         <div class="input-field">
-                            <label>Date Recieved</label>
+                            <label>Date Received</label>
                             <input type="date" required>
                         </div>
                     </div>
@@ -50,19 +60,19 @@
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Award Recieved</th>
+                    <th>Award Received</th>
                 </tr>
                 <?php if (!empty($scouts)): ?>
                     <?php foreach ($scouts as $scout): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($scout['FIRSTNAME']); ?></td>
                             <td><?php echo htmlspecialchars($scout['LASTNAME']); ?></td>
-                            <td><input type="checkbox" name="award_received[]"></td>
+                            <td><input type="checkbox" name="award_received[]"> Yes </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="7">No award information available.</td>
+                        <td colspan="3">No scouts found.</td>
                     </tr>
                 <?php endif; ?>
                 </table>
@@ -74,6 +84,6 @@
     </div>
     
     <div class="meetingBackground"></div>
-    <script src="js/award.js"></script>
+    <!-- <script src="js/award.js"></script> -->
 </body>
 </html>
