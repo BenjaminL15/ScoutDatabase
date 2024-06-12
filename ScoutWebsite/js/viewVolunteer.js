@@ -31,3 +31,7 @@ function searchVolunteer() {
         }
     }
 }
+
+
+searchInput.addEventListener('keyup', searchVolunteer);
+dateInput.addEventListener('change', searchVolunteer);

@@ -24,3 +24,6 @@ function searchAward() {
         }
     }
 }
+
+searchInput.addEventListener('keyup', searchAward);
+dateInput.addEventListener('change', searchAward);

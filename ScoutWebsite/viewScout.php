@@ -1,7 +1,10 @@
 <?php
     $db = new SQLite3('DatabaseCreator.db');
     
-    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, p.PARENT_FNAME, p.PARENT_LNAME, p.PARENTPHONE 
+    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, 
+            COALESCE(p.PARENT_FNAME, 'N/A') AS PARENT_FNAME, 
+            COALESCE(p.PARENT_LNAME, 'N/A') AS PARENT_LNAME, 
+            COALESCE(p.PARENTPHONE, 'N/A') AS PARENTPHONE
         FROM SCOUTS s 
         LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
         LEFT JOIN PARENTS p ON sp.PARENTID = p.PARENTID AND sp.CONTACT_PRIORITY = 1";
@@ -29,7 +32,8 @@
         <header>Scout Details</header>
         <div class="scout-info">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search for a scout...">
+                <input type="text" id="searchInput" placeholder="Scout information...">
+                <input type="date" id="dateInput">
                 <button onclick="searchScout()">Search</button>
             </div>
             <h2>Scout Information</h2>

@@ -1,45 +1,29 @@
 function searchScout() {
-    const input = document.getElementById("searchInput").value.trim().toLowerCase();
-    const table = document.getElementById("scoutTable");
-    const rows = table.getElementsByTagName("tr");
+    const searchInput = document.getElementById('searchInput');
+    const dateInput = document.getElementById('dateInput');
+    const filter = searchInput.value.trim().toUpperCase();
+    const dateFilter = dateInput.value.trim();
+    const rows = document.querySelectorAll('#scoutTable tr');
 
-    let firstName = '';
-    let lastName = '';
-    let rank = '';
+    rows.forEach((row, index) => {
+        if (index === 0) return; 
+        const cells = row.getElementsByTagName('td');
+        const firstName = cells[0].textContent.trim().toUpperCase();
+        const lastName = cells[1].textContent.trim().toUpperCase();
+        const rank = cells[2].textContent.trim().toUpperCase();
+        const birthday = cells[3].textContent.trim();
+        const parentFirstName = cells[4].textContent.trim().toUpperCase();
+        const parentLastName = cells[5].textContent.trim().toUpperCase();
+        const parentPhone = cells[6].textContent.trim();
 
-    const inputParts = input.includes(' ') ? input.split(' ') : [input];
-    
-    if (inputParts.length > 1) {
-        firstName = inputParts[0];
-        lastName = inputParts.slice(1).join(' '); 
-    } else {
-        firstName = inputParts[0];
-    }
-
-    for (let i = 1; i < rows.length; i++) { 
-        const cells = rows[i].getElementsByTagName("td");
-        let found = false;
-
-        const scoutFirstName = cells[0].innerText.toLowerCase();
-        const scoutLastName = cells[1].innerText.toLowerCase();
-        const scoutRank = cells[2].innerText.toLowerCase();
-
-        if ((firstName && scoutFirstName.includes(firstName)) ||
-            (lastName && scoutLastName.includes(lastName)) ||
-            (inputParts.length === 1 && scoutRank.includes(inputParts[0]))) {
-            found = true;
-        }
-
-        if (found) {
-            rows[i].style.display = "";
+        if ((firstName.includes(filter) || lastName.includes(filter) || rank.includes(filter) || birthday.includes(filter) || parentFirstName.includes(filter) || parentLastName.includes(filter) || parentPhone.includes(filter)) &&
+            (dateFilter === '' || dateFilter === birthday)) {
+            row.style.display = '';
         } else {
-            rows[i].style.display = "none";
+            row.style.display = 'none';
         }
-    }
+    });
 }
 
-
-
-
-
-
+document.getElementById('searchInput').addEventListener('keyup', searchScout);
+document.getElementById('dateInput').addEventListener('change', searchScout);
