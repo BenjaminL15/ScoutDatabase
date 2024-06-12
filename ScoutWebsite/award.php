@@ -1,3 +1,16 @@
+<?php
+    $db = new SQLite3('DatabaseCreator.db');
+
+    $sql = "SELECT FIRSTNAME, LASTNAME
+        FROM SCOUTS"; 
+    $result = $db->query($sql);
+
+    $scouts = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $scouts[] = $row;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +27,14 @@
             <div class="attendance first">
                 <div class="Mark Attendance">
                     <span class="title">Awards</span>
-            <div class="dropdown">
-                <input type="text" id="awardSearchInput" onkeyup="searchAwards()" placeholder="Search for awards...">
-                <select id="awardDropdown">
-                </select>
-            </div>
+                    <div class="dropdown">
+                        <input type="text" id="awardSearchInput" onkeyup="searchAwards()" placeholder="Search for awards...">
+                        <select id="awardDropdown" name="award">
+                            <?php foreach ($awards as $award): ?>
+                                <option value="<?php echo $award['AWARDID']; ?>"><?php echo htmlspecialchars($award['AWARDNAME']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="fields">
                         <div class="input-field">
                             <label>Date Recieved</label>
@@ -31,10 +47,24 @@
                 <span class="title">Scouts</span>
                 <input type="text" id="searchInput" onkeyup="searchScouts()" placeholder="Search for scouts...">
                 <table id="scoutsTable">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Award Recieved</th>
+                </tr>
+                <?php if (!empty($scouts)): ?>
+                    <?php foreach ($scouts as $scout): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($scout['FIRSTNAME']); ?></td>
+                            <td><?php echo htmlspecialchars($scout['LASTNAME']); ?></td>
+                            <td><input type="checkbox" name="award_received[]"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <tr>
-                        <th>Name</th>
-                        <th>Award Recieved</th>
+                        <td colspan="7">No award information available.</td>
                     </tr>
+                <?php endif; ?>
                 </table>
                 <button type="submit" class="addButton" disabled>
                     <span class="buttonText">Submit Awards</span>
