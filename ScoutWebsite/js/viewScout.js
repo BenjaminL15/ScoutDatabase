@@ -39,20 +39,7 @@ function searchScout() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const scoutTable = document.getElementById("scoutTable");
 
-    scouts.forEach(scout => {
-        const row = scoutTable.insertRow();
-        row.insertCell(0).textContent = scout.FIRSTNAME;
-        row.insertCell(1).textContent = scout.LASTNAME;
-        row.insertCell(2).textContent = scout.SCOUT_RANK;
-        row.insertCell(3).textContent = scout.SCOUT_BIRTHDAY;
-        row.insertCell(4).textContent = scout.PARENT_FNAME;
-        row.insertCell(5).textContent = scout.PARENT_LNAME;
-        row.insertCell(6).textContent = scout.PARENTPHONE;
-    });
-});
 
 
 

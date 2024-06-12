@@ -1,7 +1,6 @@
 <?php
     $db = new SQLite3('DatabaseCreator.db');
     
-    // Define the SQL query
     $sql = "SELECT s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, p.PARENT_FNAME, p.PARENT_LNAME, p.PARENTPHONE 
         FROM SCOUTS s 
         LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
@@ -34,7 +33,7 @@
                 <button onclick="searchScout()">Search</button>
             </div>
             <h2>Scout Information</h2>
-            <table>
+            <table id="scoutTable">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -64,10 +63,7 @@
             </table>
         </div>
     </div>
-    <script>
-        const scouts = <?php echo json_encode($scouts); ?>;
-    </script>
-    <script src="viewScout.js"></script>
+    <script src="js/viewScout.js"></script>
     <div class="viewBackground"></div>
 </body>
 </html>

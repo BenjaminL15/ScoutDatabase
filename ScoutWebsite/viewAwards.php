@@ -57,7 +57,7 @@
             </table>
         </div>
     </div>
-    <script src="viewAward.js"></script>
+    <script src="js/viewAward.js"></script>
     <div class="viewBackground"></div>
 </body>
 
