@@ -268,38 +268,6 @@ body{
     /* overflow: hidden; */
 }
 
-.container form .form{
-    position: absolute;
-    background-color: #fff;
-    transition: 0.7s ease-in-out;
-}
-
-.container form .form.second{
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100%);
-}
-
-form.secActive .form.second {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0%);
-}
-
-form.secActive .form.first {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.container form .title {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 6px 0;
-    color: #333;
-}
-
 .container form .fields {
     display: flex;
     align-items: center;
@@ -351,7 +319,7 @@ form .fields .input-field {
     margin-right: 20px; 
 }
 
-.container form button, .backButton {
+.container form button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -368,7 +336,7 @@ form .fields .input-field {
     cursor: pointer;
 }
 
-.container form button, .backButton {
+.container form button {
     font-size: 14px;
     font-weight: 400;
 }
@@ -403,7 +371,7 @@ form .buttons button, .backButton{
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
 }
 
-/* .scoutBackground {
+.scoutBackground {
     position: fixed;
     top: 0;
     left: 0;
@@ -415,7 +383,7 @@ form .buttons button, .backButton{
     background-position: center center;
     z-index: -1;
     filter: blur(5px);
-} */
+}
 
 /* View Adult volunteer page */
 
