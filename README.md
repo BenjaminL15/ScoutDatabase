@@ -12,6 +12,15 @@ The purpose of this database was to create a website where administrators, advis
 ## Installation
 
 1. **IDE and Extenstions**
-        ```bash
-    git clone https://github.com/yourusername/your-repository.git
-    ```
+    - Visual Studio Code is recommended for the IDE of use in order to open the project and test for yourself (only if the extensions are available to you).
+    - Extensions: These are the following extensions needed in order to open the project and also view the table if necessary
+        - **[SQLite Viewer - Florian Klampfer](https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer)**: Used to view the tables within the DatabaseCreator.db file 
+        - **[PHP Server - Brapifra](https://marketplace.visualstudio.com/items?itemName=brapifra.phpserver)**: Used to view the php files (more information on this later on)
+
+2. **XAMPP Installation & Setup**
+    - In order to view the servers, you need XAMPP which is a PHP development environment that we used to open and create our database.
+        - **[XAMPP - Apache Friends](https://www.apachefriends.org/)**: It should redirect you and automatically download the program onto your computer. 
+            - [Installation Guide Video](https://www.youtube.com/watch?v=VCHXCusltqI&ab_channel=GeekyScript): If you prefer a video guide, you can watch this installation guide on YouTube for a step-by-step process.
+    - After downloading and setting XAMPP, you must setup the environment variables in order to run the PHP path that is in this project. 
+        1. First, find the pathway to your PHP file within the file explorer. To do this, go to your local disk (main storage drive), navigate to the xampp folder, and find the php folder and copy the path that leads to that folder.
+            - ![PHP Path File Explorer](screenshots/path.png)
