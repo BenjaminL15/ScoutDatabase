@@ -1,7 +1,7 @@
 <?php
 $db = new SQLite3('DatabaseCreator.db');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax']) && $_POST['ajax'] == '1') {
     $awardID = $_POST['award'];
     $dateReceived = $_POST['date_received'];
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: {$_SERVER['PHP_SELF']}");
+    echo json_encode(['success' => true]);
     exit();
 }
 
@@ -46,7 +46,7 @@ while ($row = $resultAwards->fetchArray(SQLITE3_ASSOC)) {
 <body>
     <div class="container">
         <header>Awards</header>
-        <form method="post" action="">
+        <form id="awardForm" method="post" action="">
             <div class="attendance first">
                 <div class="Mark Attendance">
                     <span class="title">Awards</span>
@@ -97,6 +97,15 @@ while ($row = $resultAwards->fetchArray(SQLITE3_ASSOC)) {
     </div>
     
     <div class="meetingBackground"></div>
+
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <img src="check.png" alt="Success" class="checkmark-icon">
+        <p>Awards have been successfully submitted!</p>
+        <button class="close-btn" onclick="closePopup()">Return Home</button>
+        <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
+    </div>
+
     <script src="js/award.js"></script>
 </body>
 </html>

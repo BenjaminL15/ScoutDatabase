@@ -680,6 +680,61 @@ form .buttons button, .backButton{
     outline: none;
 }
 
+.popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 1000;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.popup .checkmark-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.popup p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.popup .close-btn, .popup .refresh-btn {
+    background-color: #000;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.popup .close-btn:hover, .popup .refresh-btn:hover {
+    background-color: #333;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+
 
 
 /* view scouts */
