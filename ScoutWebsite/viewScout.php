@@ -80,14 +80,15 @@
                             <td><?php echo is_null($scout['PARENT_FNAME']) ? 'N/A' : htmlspecialchars($scout['PARENT_FNAME']); ?></td>
                             <td><?php echo is_null($scout['PARENT_LNAME']) ? 'N/A' : htmlspecialchars($scout['PARENT_LNAME']); ?></td>
                             <td><?php echo is_null($scout['PARENTPHONE']) ? 'N/A' : htmlspecialchars($scout['PARENTPHONE']); ?></td>
-                            <td><button class="edit-button" onclick="openModal(
-                               '<?php echo htmlspecialchars($scout['SCOUTID']); ?>',
-                               '<?php echo htmlspecialchars($scout['FIRSTNAME']); ?>',
-                               '<?php echo htmlspecialchars($scout['LASTNAME']); ?>',
-                               '<?php echo htmlspecialchars($scout['SCOUT_RANK']); ?>',
-                               '<?php echo htmlspecialchars($scout['SCOUT_BIRTHDAY']); ?>'
-                           )">Edit</button>
-                            <button class="delete-btn" onclick="deleteScout('<?php echo htmlspecialchars($scout['SCOUTID']); ?>')">Delete</button>
+                            <td class="actions">
+                                <button class="edit-btn" onclick="openModal(
+                                   '<?php echo htmlspecialchars($scout['SCOUTID']); ?>',
+                                   '<?php echo htmlspecialchars($scout['FIRSTNAME']); ?>',
+                                   '<?php echo htmlspecialchars($scout['LASTNAME']); ?>',
+                                   '<?php echo htmlspecialchars($scout['SCOUT_RANK']); ?>',
+                                   '<?php echo htmlspecialchars($scout['SCOUT_BIRTHDAY']); ?>'
+                               )">Edit</button>
+                                <button class="delete-btn" onclick="deleteScout('<?php echo htmlspecialchars($scout['SCOUTID']); ?>')">Delete</button>
                            </td>
                         </tr>
                     <?php endforeach; ?>
