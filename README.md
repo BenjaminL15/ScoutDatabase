@@ -23,4 +23,4 @@ The purpose of this database was to create a website where administrators, advis
             - [Installation Guide Video](https://www.youtube.com/watch?v=VCHXCusltqI&ab_channel=GeekyScript): If you prefer a video guide, you can watch this installation guide on YouTube for a step-by-step process.
     - After downloading and setting XAMPP, you must setup the environment variables in order to run the PHP path that is in this project. 
         1. First, find the pathway to your PHP file within the file explorer. To do this, go to your local disk (main storage drive), navigate to the xampp folder, and find the php folder and copy the path that leads to that folder.
-            - ![PHP Path File Explorer](screenshots/path.png)
+        ![PHP Path File Explorer](screenshots/path.png)
