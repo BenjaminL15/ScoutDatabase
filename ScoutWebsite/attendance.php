@@ -1,36 +1,32 @@
 <?php
 
-    $db = new SQLite3('DatabaseCreator.db');
+$db = new SQLite3('DatabaseCreator.db');
 
-    $successMessage = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $meetingDate = $_POST['meeting_date'];
+    $attendance = $_POST['attendance'];
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $meetingDate = $_POST['meeting_date'];
-        $attendance = $_POST['attendance'];
-    
-        $db->exec("INSERT INTO MEETING (MEETINGDATE) VALUES ('$meetingDate')");
-        $meetingID = $db->lastInsertRowID();
-    
-        foreach ($attendance as $scoutID => $attendanceData) {
-            $attendedValue = isset($attendanceData['attended']) ? (int)$attendanceData['attended'] : 0;
-    
-            $db->exec("INSERT INTO MEETING_SCOUT (MEETINGID, SCOUTID, ATTENDANCE) VALUES ($meetingID, $scoutID, $attendedValue)");
-        }
-    
-        $successMessage = 'Attendance successfully recorded.';
-    
-        header("Location: {$_SERVER['PHP_SELF']}");
-        exit(); 
+    $db->exec("INSERT INTO MEETING (MEETINGDATE) VALUES ('$meetingDate')");
+    $meetingID = $db->lastInsertRowID();
+
+    foreach ($attendance as $scoutID => $attendanceData) {
+        $attendedValue = isset($attendanceData['attended']) ? (int)$attendanceData['attended'] : 0;
+
+        $db->exec("INSERT INTO MEETING_SCOUT (MEETINGID, SCOUTID, ATTENDANCE) VALUES ($meetingID, $scoutID, $attendedValue)");
     }
-    
 
-    $sql = "SELECT SCOUTID, FIRSTNAME, LASTNAME FROM SCOUTS"; 
-    $result = $db->query($sql);
+    echo json_encode(['success' => true]);
+    exit();
+}
 
-    $scouts = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $scouts[] = $row;
-    }
+
+$sql = "SELECT SCOUTID, FIRSTNAME, LASTNAME FROM SCOUTS";
+$result = $db->query($sql);
+
+$scouts = [];
+while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    $scouts[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +41,7 @@
 <body>
     <div class="container">
         <header>Meeting</header>
-        <?php if ($successMessage): ?>
-            <div class="success-message"><?php echo htmlspecialchars($successMessage); ?></div>
-        <?php endif; ?>
-        <form method="post" action="">
+        <form id="attendanceForm" method="post" action="">
             <div class="attendance first">
                 <div class="Mark Attendance">
                     <span class="title">Scout Attendance</span>
@@ -82,7 +75,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="3">No scouts available.</td>
+                            <td colspan="4">No scouts available.</td>
                         </tr>
                     <?php endif; ?>
                 </table>
@@ -94,5 +87,13 @@
     </div>
     <script src="js/addAttendance.js"></script>
     <div class="meetingBackground"></div>
+
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <img src="check.png" alt="Success" class="checkmark-icon">
+        <p>Attendance has been successfully submitted!</p>
+        <button class="close-btn" onclick="closePopup()">Return Home</button>
+        <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
+    </div>
 </body>
 </html>

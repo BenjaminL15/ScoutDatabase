@@ -58,4 +58,4 @@ function refreshPage() {
 
 searchInput.addEventListener('keyup', searchScouts);
 
-populateAwardsDropdown();
+
