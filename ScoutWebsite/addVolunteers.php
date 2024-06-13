@@ -1,8 +1,7 @@
 <?php
 $db = new SQLite3('DatabaseCreator.db');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $volfirst = $_POST['vol_first'];
     $vollast = $_POST['vol_last'];
     $volphone = $_POST['vol_phone'];
@@ -10,12 +9,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $volstate = $_POST['vol_state'];
     $volzip = $_POST['vol_zip'];
 
-    $db->exec("INSERT INTO ADULT_VOLUNTEERS(AVFNAME, AVLNAME, AVPHONE, AVADDRESS, AVSTATE, AVZIP) VALUES ($volfirst, $vollast, $volphone, $voladdress, $volstate, $volzip)");
-    $volID = $db->lastInsertRowID();
-    echo json_encode(['success' => true]);
+    $parentID = null;
+    $counselorID = null;
+
+    if (isset($_POST['vol_parent']) && $_POST['vol_parent'] === 'on') {
+        $stmt = $db->prepare('SELECT PARENTID FROM PARENTS WHERE PARENT_FNAME = :volfirst AND PARENT_LNAME = :vollast');
+        $stmt->bindValue(':volfirst', $volfirst, SQLITE3_TEXT);
+        $stmt->bindValue(':vollast', $vollast, SQLITE3_TEXT);
+        $result = $stmt->execute();
+        $parent = $result->fetchArray(SQLITE3_ASSOC);
+
+        if ($parent) {
+            $parentID = $parent['PARENTID'];
+        }
+    }
+
+    if (isset($_POST['vol_counselor']) && $_POST['vol_counselor'] === 'on') {
+        $stmt = $db->prepare('SELECT COUNSELOR_ID FROM MERITBADGE_COUNSELOR WHERE COUNSELOR_FNAME = :volfirst AND COUNSELOR_LNAME = :vollast');
+        $stmt->bindValue(':volfirst', $volfirst, SQLITE3_TEXT);
+        $stmt->bindValue(':vollast', $vollast, SQLITE3_TEXT);
+        $result = $stmt->execute();
+        $counselor = $result->fetchArray(SQLITE3_ASSOC);
+
+        if ($counselor) {
+            $counselorID = $counselor['COUNSELOR_ID'];
+        }
+    }
+
+    $stmt = $db->prepare('INSERT INTO ADULT_VOLUNTEERS (PARENTID, COUNSELOR_ID, AVFNAME, AVLNAME, AVPHONE, AVADDRESS, AVSTATE, AVZIP) 
+                          VALUES (:parentID, :counselorID, :volfirst, :vollast, :volphone, :voladdress, :volstate, :volzip)');
+    $stmt->bindValue(':parentID', $parentID, SQLITE3_INTEGER);
+    $stmt->bindValue(':counselorID', $counselorID, SQLITE3_INTEGER);
+    $stmt->bindValue(':volfirst', $volfirst, SQLITE3_TEXT);
+    $stmt->bindValue(':vollast', $vollast, SQLITE3_TEXT);
+    $stmt->bindValue(':volphone', $volphone, SQLITE3_TEXT);
+    $stmt->bindValue(':voladdress', $voladdress, SQLITE3_TEXT);
+    $stmt->bindValue(':volstate', $volstate, SQLITE3_TEXT);
+    $stmt->bindValue(':volzip', $volzip, SQLITE3_TEXT);
+    $stmt->execute();
+
+
+    $response = ['success' => true];
+    echo json_encode($response);
     exit();
 }
-
 ?>
 
 
@@ -31,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <body>
     <div class="container">
         <header>Volunteer Information</header>
-        <form action="#">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form" id="volunteerForm">
             <div class="form first">
                 <div class="details volunteer">
                     <span class="title">Volunteer Details</span>
@@ -69,14 +106,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                             <input type="checkbox" id="counselor" name = "vol_counselor">
                         </div>
                     </div>
-                    <button class="submitButton">
+                    <button type="submit" class="addButton">
                         <span class="buttonText">Submit</span>
                     </button>
                 </div>
             </div>
         </form>
     </div>
-    <script src="addVolunteer.js"></script>
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <img src="check.png" alt="Success" class="checkmark-icon">
+        <p>Awards have been successfully submitted!</p>
+        <button class="close-btn" onclick="closePopup()">Return Home</button>
+        <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
+    </div>
+    <script src="js/addVolunteer.js"></script>
     <div class="volunteerBack"></div>
 </body>
 </html>
