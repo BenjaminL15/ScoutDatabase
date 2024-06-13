@@ -1,17 +1,30 @@
-const form = document.querySelector("form"),
-    nextButton = form.querySelector(".nextButton"),
-    backButton = form.querySelector(".backButton"),
-    allInput = form.querySelectorAll(".first input");
+document.getElementById('scoutForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    formData.append('ajax', '1');
 
-nextButton.addEventListener("click", ()=> {
-    allInput.forEach(input => {
-        if(input.value != "") {
-            form.classList.add('secActive');
-        } else {
-            form.classList.remove('secActive');
-        }
+    fetch('', {
+        method: 'POST',
+        body: formData
     })
-})
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showPopup();
+        }
+    });
+});
 
 
-backButton.addEventListener("click", ()=> form.classList.remove('secActive')); 
+function showPopup() {
+    document.getElementById('popupOverlay').style.display = 'block';
+    document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup() {
+    window.location.href = 'welcomePage.php';
+}
+
+function refreshPage() {
+    window.location.reload();
+}

@@ -47,6 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "INSERT INTO SCOUT_PARENT (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY) VALUES ('$parent2_id', '$scout_id', '$parent2_relationship', '$parent2_contact')";
         $db->exec($sql);
     }
+    $response = ['success' => true];
+    echo json_encode($response);
+    exit();
 }
 
 $sql = "SELECT RANKID, RANK_NAME FROM RANK";
@@ -71,7 +74,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
     <div class="container">
         <header>Information & Details</header>
 
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form" id="scoutForm">
             <div class="details personal">
                 <span class="title">Scout Information</span>
 
@@ -176,8 +179,15 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             </div>
         </form>
     </div>
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <img src="check.png" alt="Success" class="checkmark-icon">
+        <p>Awards have been successfully submitted!</p>
+        <button class="close-btn" onclick="closePopup()">Return Home</button>
+        <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
+    </div>
     <div class="scoutBackground"></div>
-    <script src="addScout.js"></script>
+    <script src="js/addScout.js"></script>
 </body>
 </html>
 
