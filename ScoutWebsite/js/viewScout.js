@@ -37,14 +37,28 @@ function closeModal() {
     document.getElementById('editModal').style.display = 'none';
 }
 
-function deleteScout(scoutId) {
-    if (confirm("Are you sure you want to delete this scout?")) {
+let deleteScoutID = null;
+
+function confirmDeleteScout(scoutId) {
+    deleteScoutID = scoutId;
+    document.getElementById('confirmPopupOverlay').style.display = 'block';
+    document.getElementById('confirmPopup').style.display = 'block';
+}
+
+function closeConfirmPopup() {
+    deleteScoutID = null;
+    document.getElementById('confirmPopupOverlay').style.display = 'none';
+    document.getElementById('confirmPopup').style.display = 'none';
+}
+
+function deleteScout() {
+    if (deleteScoutID !== null) {
         fetch('deleteScout.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: 'scoutId=' + encodeURIComponent(scoutId),
+            body: 'scoutId=' + encodeURIComponent(deleteScoutID),
         })
         .then(response => {
             if (!response.ok) {
@@ -53,7 +67,13 @@ function deleteScout(scoutId) {
             return response.text();
         })
         .then(data => {
-            showPopup('Scout successfully deleted!');
+            closeConfirmPopup();
+            if (data === 'Success') {
+                showPopup('Scout successfully deleted!');
+                document.querySelector(`tr[data-scout-id="${deleteScoutID}"]`).remove();
+            } else {
+                alert('Failed to delete scout.');
+            }
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -61,9 +81,10 @@ function deleteScout(scoutId) {
     }
 }
 
-function showPopup() {
+function showPopup(message) {
     document.getElementById('popupOverlay').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
+    document.getElementById('popup').querySelector('p').innerText = message;
 }
 
 function closePopup() {
@@ -73,5 +94,6 @@ function closePopup() {
 function refreshPage() {
     window.location.reload();
 }
+
 document.getElementById('searchInput').addEventListener('keyup', searchScout);
 document.getElementById('dateInput').addEventListener('change', searchScout);

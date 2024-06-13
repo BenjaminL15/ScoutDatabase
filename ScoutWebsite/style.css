@@ -399,7 +399,7 @@ form .buttons button, .backButton{
 
 .volunteers-info table th,
 .volunteers-info table td {
-    padding: 10px;
+    padding: 6px;
     border: 1px solid #ddd;
     text-align: left;
 }
@@ -691,7 +691,7 @@ form .buttons button, .backButton{
     margin-bottom: 20px;
 }
 
-.popup .close-btn, .popup .refresh-btn {
+.popup .close-btn, .popup .refresh-btn, .confirm-btn, .cancel-btn {
     background-color: #000;
     color: white;
     border-radius: 10px;
@@ -702,7 +702,7 @@ form .buttons button, .backButton{
     margin: 5px;
 }
 
-.popup .close-btn:hover, .popup .refresh-btn:hover {
+.popup .close-btn:hover, .popup .refresh-btn:hover, .confirm-btn:hover, .cancel-btn:hover {
     background-color: #333;
 }
 

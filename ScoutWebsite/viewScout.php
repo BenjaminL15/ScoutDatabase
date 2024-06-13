@@ -88,7 +88,7 @@
                                    '<?php echo htmlspecialchars($scout['SCOUT_RANK']); ?>',
                                    '<?php echo htmlspecialchars($scout['SCOUT_BIRTHDAY']); ?>'
                                )">Edit</button>
-                                <button class="delete-btn" onclick="deleteScout('<?php echo htmlspecialchars($scout['SCOUTID']); ?>')">Delete</button>
+                                <button class="delete-btn" onclick="confirmDeleteScout('<?php echo htmlspecialchars($scout['SCOUTID']); ?>')">Delete</button>
                            </td>
                         </tr>
                     <?php endforeach; ?>
@@ -128,6 +128,12 @@
         <p>Scout has been successfully removed!</p>
         <button class="close-btn" onclick="closePopup()">Return Home</button>
         <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
+    </div>
+    <div class="popup-overlay" id="confirmPopupOverlay"></div>
+    <div class="popup" id="confirmPopup">
+        <p>Are you sure you want to delete this volunteer?</p>
+        <button class="confirm-btn" onclick="deleteScout()">Yes</button>
+        <button class="cancel-btn" onclick="closeConfirmPopup()">No</button>
     </div>
     <script src="js/viewScout.js"></script>
     <div class="viewBackground"></div>

@@ -19,4 +19,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: viewScout.php');
     exit();
 }
-?>
+
