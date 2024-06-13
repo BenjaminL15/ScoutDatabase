@@ -1,45 +1,52 @@
 <?php
 $db = new SQLite3('DatabaseCreator.db');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
-    $scoutfirst = $_POST['scout_first'];
-    $scoutlast = $_POST['scout_last'];
-    $scoutbday = $_POST['scout_bday'];
-    
-    $parentfirst = $_POST['parent_first'];
-    $parentlast = $_POST['parent_last'];
-    $parentnumber = $_POST['parent_number'];
-    $parentaddress = $_POST['parent_address'];
-    $parentstate = $_POST['parent_state'];
-    $parentzip = $_POST['parent_zip'];
-    $parentrelationship = $_POST['parent_relationship'];
-    $parentcontact = $_POST['parent_contact'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $scout_first = $_POST['scout_first'];
+    $scout_last = $_POST['scout_last'];
+    $rank = $_POST['rank'];
+    $scout_bday = $_POST['scout_bday'];
 
-    $parent2first = $_POST['parent2_first_name'];
-    $parent2last = $_POST['parent2_last_name'];
-    $parent2number = $_POST['parent2_number'];
-    $parent2address = $_POST['parent2_address'];
-    $parent2state = $_POST['parent2_state'];
-    $parent2zip = $_POST['parent2_zip'];
-    $parent2relationship = $_POST['parent2_relationship'];
-    $parent2contact = $_POST['parent2_contact'];
+    $parent_first = $_POST['parent_first'];
+    $parent_last = $_POST['parent_last'];
+    $parent_number = $_POST['parent_number'];
+    $parent_address = $_POST['parent_address'];
+    $parent_state = $_POST['parent_state'];
+    $parent_zip = $_POST['parent_zip'];
+    $parent_relationship = $_POST['parent_relationship'];
+    $parent_contact = isset($_POST['parent_contact']) ? 1 : 2;
 
-    // Scout
-    $db->exec("INSERT INTO SCOUTS (FIRSTNAME, LASTNAME, SCOUT_BIRTHDAY) VALUES ('$scoutfirst, $scoutlast, $scoutbday')");
-    $scoutID = $db->lastInsertRowID();
+    $parent2_first = $_POST['parent2_first_name'];
+    $parent2_last = $_POST['parent2_last_name'];
+    $parent2_number = $_POST['parent2_number'];
+    $parent2_address = $_POST['parent2_address'];
+    $parent2_state = $_POST['parent2_state'];
+    $parent2_zip = $_POST['parent2_zip'];
+    $parent2_relationship = $_POST['parent2_relationship'];
+    $parent2_contact = isset($_POST['parent2_contact']) ? 1 : 2;
 
-    // Parent 1
-    $db->exec("INSERT INTO PARENTS (SCOUTID, PARENT_FNAME, PARENT_LNAME, PARENTPHONE, PARENTADDRESS, PARENTSTATE, PARENTZIP) VALUES ($scoutID, '$parentfirst', '$parentlast', '$parentnumber', '$parentaddress', '$parentstate', '$parentzip', '$parentrelationship', '$parentcontact')");
-    $parentID = $db->lastInsertRowID();
-    $db->exec("INSERT INTO SCOUTS (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY) VALUES ($parentID, $scoutID, $parentrelationship, $parentcontact)");
+    $sql = "INSERT INTO SCOUTS (FIRSTNAME, LASTNAME, RANKID, SCOUT_BIRTHDAY) VALUES ('$scout_first', '$scout_last', '$rank', '$scout_bday')";
+    $db->exec($sql);
 
-    // Parent 2
-    $db->exec("INSERT INTO PARENTS (SCOUTID, PARENT_FNAME, PARENT_LNAME, PARENTPHONE, PARENTADDRESS, PARENTSTATE, PARENTZIP) VALUES ($scoutID, '$parent2first', '$parent2last', '$parent2number', '$parent2address', '$parent2state', '$parent2zip', '$parent2relationship', '$parent2contact')");
-    $parent2ID = $db->lastInsertRowID();
-    $db->exec("INSERT INTO SCOUTS (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY) VALUES ($parent2ID, $scoutID, $parent2relationship, $parent2contact)");
-    echo json_encode(['success' => true]);
-    exit();
+    $scout_id = $db->lastInsertRowID();
+
+    $sql = "INSERT INTO PARENTS (SCOUTID, PARENT_FNAME, PARENT_LNAME, PARENTPHONE, PARENTADDRESS, PARENTSTATE, PARENTZIP) VALUES ('$scout_id', '$parent_first', '$parent_last', '$parent_number', '$parent_address', '$parent_state', '$parent_zip')";
+    $db->exec($sql);
+
+    $parent_id = $db->lastInsertRowID();
+
+    $sql = "INSERT INTO SCOUT_PARENT (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY) VALUES ('$parent_id', '$scout_id', '$parent_relationship', '$parent_contact')";
+    $db->exec($sql);
+
+    if (!empty($parent2_first) && !empty($parent2_last)) {
+        $sql = "INSERT INTO PARENTS (SCOUTID, PARENT_FNAME, PARENT_LNAME, PARENTPHONE, PARENTADDRESS, PARENTSTATE, PARENTZIP) VALUES ('$scout_id', '$parent2_first', '$parent2_last', '$parent2_number', '$parent2_address', '$parent2_state', '$parent2_zip')";
+        $db->exec($sql);
+
+        $parent2_id = $db->lastInsertRowID();
+
+        $sql = "INSERT INTO SCOUT_PARENT (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY) VALUES ('$parent2_id', '$scout_id', '$parent2_relationship', '$parent2_contact')";
+        $db->exec($sql);
+    }
 }
 
 $sql = "SELECT RANKID, RANK_NAME FROM RANK";

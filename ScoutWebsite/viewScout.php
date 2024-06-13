@@ -1,14 +1,19 @@
 <?php
     $db = new SQLite3('DatabaseCreator.db');
     
-    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, r.RANK_NAME AS SCOUT_RANK, s.SCOUT_BIRTHDAY, 
-                COALESCE(p.PARENT_FNAME, 'N/A') AS PARENT_FNAME, 
-                COALESCE(p.PARENT_LNAME, 'N/A') AS PARENT_LNAME, 
-                COALESCE(p.PARENTPHONE, 'N/A') AS PARENTPHONE
-            FROM SCOUTS s 
-            LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
-            LEFT JOIN PARENTS p ON sp.PARENTID = p.PARENTID AND sp.CONTACT_PRIORITY = 1
-            LEFT JOIN RANK r ON s.RANKID = r.RANKID";
+    $sql = "SELECT 
+    s.FIRSTNAME, 
+    s.LASTNAME, 
+    r.RANK_NAME AS SCOUT_RANK, 
+    s.SCOUT_BIRTHDAY, 
+    p.PARENT_FNAME, 
+    p.PARENT_LNAME, 
+    p.PARENTPHONE
+FROM SCOUTS s 
+LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
+LEFT JOIN PARENTS p ON sp.PARENTID = p.PARENTID AND sp.CONTACT_PRIORITY = 1
+LEFT JOIN RANK r ON s.RANKID = r.RANKID";
+
 
     
     $result = $db->query($sql);
@@ -55,9 +60,9 @@
                             <td><?php echo htmlspecialchars($scout['LASTNAME']); ?></td>
                             <td><?php echo htmlspecialchars($scout['SCOUT_RANK']); ?></td>
                             <td><?php echo htmlspecialchars($scout['SCOUT_BIRTHDAY']); ?></td>
-                            <td><?php echo htmlspecialchars($scout['PARENT_FNAME']); ?></td>
-                            <td><?php echo htmlspecialchars($scout['PARENT_LNAME']); ?></td>
-                            <td><?php echo htmlspecialchars($scout['PARENTPHONE']); ?></td>
+                            <td><?php echo is_null($scout['PARENT_FNAME']) ? 'N/A' : htmlspecialchars($scout['PARENT_FNAME']); ?></td>
+                            <td><?php echo is_null($scout['PARENT_LNAME']) ? 'N/A' : htmlspecialchars($scout['PARENT_LNAME']); ?></td>
+                            <td><?php echo is_null($scout['PARENTPHONE']) ? 'N/A' : htmlspecialchars($scout['PARENTPHONE']); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
