@@ -85,7 +85,7 @@ $db->close();
             <button type="submit" class="login">Login</button>
     
             <div class="register">
-                <p><a href="#">Register</a> for Scouts!</p>
+                <p><a href="register.php">Register</a> for Scouts!</p>
             </div>
     
             <?php if(isset($error_message) && !empty($error_message)): ?>
