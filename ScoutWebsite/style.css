@@ -108,6 +108,12 @@
     filter: blur(5px);
 }
 
+.error-message {
+    text-align: center; 
+    color: red; 
+    margin-top: 10px; 
+}
+
 /* Home page css */
 .buttons-option {
     display: flex;
