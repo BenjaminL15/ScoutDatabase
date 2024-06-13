@@ -2,20 +2,27 @@
     $db = new SQLite3('DatabaseCreator.db');
     
     $sql = "SELECT 
-    s.FIRSTNAME, 
-    s.LASTNAME, 
-    r.RANK_NAME AS SCOUT_RANK, 
-    s.SCOUT_BIRTHDAY, 
-    p.PARENT_FNAME, 
-    p.PARENT_LNAME, 
-    p.PARENTPHONE
-FROM SCOUTS s 
-LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
-LEFT JOIN PARENTS p ON sp.PARENTID = p.PARENTID AND sp.CONTACT_PRIORITY = 1
-LEFT JOIN RANK r ON s.RANKID = r.RANKID";
+        s.FIRSTNAME, 
+        s.LASTNAME, 
+        r.RANK_NAME AS SCOUT_RANK, 
+        s.SCOUT_BIRTHDAY, 
+        p.PARENT_FNAME, 
+        p.PARENT_LNAME, 
+        p.PARENTPHONE
+    FROM SCOUTS s 
+    LEFT JOIN (
+        SELECT 
+            sp.SCOUTID,
+            p.PARENT_FNAME,
+            p.PARENT_LNAME,
+            p.PARENTPHONE
+        FROM SCOUT_PARENT sp
+        INNER JOIN PARENTS p ON sp.PARENTID = p.PARENTID
+        WHERE sp.CONTACT_PRIORITY = 1
+    ) p ON s.SCOUTID = p.SCOUTID
+    LEFT JOIN RANK r ON s.RANKID = r.RANKID
+    ";
 
-
-    
     $result = $db->query($sql);
 
     $scouts = [];
