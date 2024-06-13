@@ -1,8 +1,7 @@
 <?php
-    // Establish connection to SQLite database
+
     $db = new SQLite3('DatabaseCreator.db');
 
-    // Query to fetch scouts data
     $sql_scouts = "SELECT FIRSTNAME, LASTNAME FROM SCOUTS"; 
     $result_scouts = $db->query($sql_scouts);
 
@@ -11,7 +10,6 @@
         $scouts[] = $row;
     }
 
-    // Query to fetch awards data
     $sql_awards = "SELECT AWARDID, AWARDNAME FROM AWARDS"; 
     $result_awards = $db->query($sql_awards);
 
