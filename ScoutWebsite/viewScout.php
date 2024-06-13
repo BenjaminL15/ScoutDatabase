@@ -68,7 +68,7 @@
                     <th>Parent's First Name</th>
                     <th>Parent's Last Name</th>
                     <th>Parent's Phone Number</th>
-                    <th>Action</th>
+                    <th>Updates</th>
                 </tr>
                 <?php if (!empty($scouts)): ?>
                     <?php foreach ($scouts as $scout): ?>
