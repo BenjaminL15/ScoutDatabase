@@ -108,6 +108,19 @@
     filter: blur(5px);
 }
 
+.error-message {
+    text-align: center; 
+    color: red; 
+    margin-top: 8px; 
+}
+
+.success-message {
+    text-align: center; 
+    color: blue; 
+    margin-top: 8px; 
+}
+
+
 /* Home page css */
 .buttons-option {
     display: flex;
@@ -205,6 +218,8 @@
     z-index: -1;
     filter: blur(5px);
 }
+
+
 
 /* Add page css */
 
@@ -915,4 +930,24 @@ form .buttons button, .backButton{
     background-position: center center;
     z-index: -1;
     filter: blur(5px);
+}
+
+/* register page */
+
+.accountMade {
+    margin-top: 20px; 
+    text-align: center; 
+}
+
+.accountMade p {
+    font-size: 16px; 
+}
+
+.accountMade a {
+    color: #000; 
+    text-decoration: none; 
+}
+
+.accountMade a:hover {
+    text-decoration: underline; 
 }

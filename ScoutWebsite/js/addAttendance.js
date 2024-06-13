@@ -35,7 +35,7 @@ function showPopup() {
 }
 
 function closePopup() {
-    window.location.href = 'welcomePage.php'; // Change this to your desired location
+    window.location.href = 'welcomePage.php'; 
 }
 
 function refreshPage() {
