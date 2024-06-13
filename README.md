@@ -12,4 +12,6 @@ The purpose of this database was to create a website where administrators, advis
 ## Installation
 
 1. **IDE and Extenstions**
-    a. 
+        ```bash
+    git clone https://github.com/yourusername/your-repository.git
+    ```
