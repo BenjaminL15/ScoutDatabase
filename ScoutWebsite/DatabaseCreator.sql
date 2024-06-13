@@ -151,7 +151,12 @@ INSERT INTO PARENTS (PARENTID, SCOUTID, PARENT_FNAME, PARENT_LNAME, PARENTPHONE,
 ('2', '3', 'Bianca', 'Jewett', '703-222-1111', '43244 Bristow Ave', 'Virginia', '22903'),
 ('3', '3', 'Brian', 'Lai', '703-222-1111', '4324 Bristow Ave', 'Virginia', '22903'),
 ('4', '2', 'Bob', 'Lee', '703-111-1111', '6859 Charlottesville Way', 'Virginia', '22903'),
-('5', '4', 'Bryan', 'Lie', '703-222-1111', '1234 Manassas Street', 'Virginia', '22903');
+('5', '4', 'Bryan', 'Barker', '703-222-1111', '1234 Manassas Street', 'Virginia', '22903'),
+('6', '4', 'Andrea', 'Barker', '703-222-1111', '1234 Chantilly Street', 'Virginia', '22903'),
+('7', '5', 'Winston', 'Stewart', '703-222-1111', '1234 Manassas Street', 'Virginia', '22903'),
+('8', '6', 'Morgan', 'Bailey', '703-222-1111', '1234 Manassas Street', 'Virginia', '22903'),
+('9', '7', 'Sophia', 'Church', '703-222-1111', '1234 Manassas Street', 'Virginia', '22903'),
+('10', '8', 'Richard', 'Webber', '703-222-1111', '1234 Manassas Street', 'Virginia', '22903');
 
 -- Create SCOUT_PARENT table
 CREATE TABLE SCOUT_PARENT (
@@ -169,7 +174,12 @@ INSERT INTO SCOUT_PARENT (PARENTID, SCOUTID, RELATIONSHIP_TYPE, CONTACT_PRIORITY
 ('2', '2', 'DAD', '1'),
 ('3', '3', 'MOM', '2'),
 ('4', '3', 'DAD', '1'),
-('5', '4', 'DAD', '1');
+('5', '4', 'DAD', '1'),
+('6', '4', 'MOM', '1'),
+('7', '5', 'DAD', '1'),
+('8', '6', 'MOM', '1'),
+('9', '7', 'MOM', '1'),
+('10', '8', 'DAD', '1');
 
 -- Create ADULT_VOLUNTEERS table
 CREATE TABLE ADULT_VOLUNTEERS (
