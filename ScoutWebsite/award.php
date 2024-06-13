@@ -82,6 +82,6 @@
     </div>
     
     <div class="meetingBackground"></div>
-    <!-- <script src="js/award.js"></script> -->
+    <script src="js/award.js"></script>
 </body>
 </html>
