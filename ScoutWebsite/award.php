@@ -1,22 +1,37 @@
 <?php
+$db = new SQLite3('DatabaseCreator.db');
 
-    $db = new SQLite3('DatabaseCreator.db');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $awardID = $_POST['award'];
+    $dateReceived = $_POST['date_received'];
 
-    $sql_scouts = "SELECT FIRSTNAME, LASTNAME FROM SCOUTS"; 
-    $result_scouts = $db->query($sql_scouts);
-
-    $scouts = [];
-    while ($row = $result_scouts->fetchArray(SQLITE3_ASSOC)) {
-        $scouts[] = $row;
+    foreach ($_POST['award_received'] as $scoutID => $received) {
+        if ($received == '1') {
+            $stmt = $db->prepare("INSERT INTO MEMBER_AWARDS (SCOUTID, AWARDID, DATE_AWARDED) VALUES (:scoutID, :awardID, :dateReceived)");
+            $stmt->bindValue(':scoutID', $scoutID, SQLITE3_INTEGER);
+            $stmt->bindValue(':awardID', $awardID, SQLITE3_INTEGER);
+            $stmt->bindValue(':dateReceived', $dateReceived, SQLITE3_TEXT);
+            $stmt->execute();
+        }
     }
 
-    $sql_awards = "SELECT AWARDID, AWARDNAME FROM AWARDS"; 
-    $result_awards = $db->query($sql_awards);
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit();
+}
 
-    $awards = [];
-    while ($row = $result_awards->fetchArray(SQLITE3_ASSOC)) {
-        $awards[] = $row;
-    }
+$sql = "SELECT SCOUTID, FIRSTNAME, LASTNAME FROM SCOUTS";
+$result = $db->query($sql);
+$scouts = [];
+while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    $scouts[] = $row;
+}
+
+$sqlAwards = "SELECT AWARDID, AWARDNAME FROM AWARDS";
+$resultAwards = $db->query($sqlAwards);
+$awards = [];
+while ($row = $resultAwards->fetchArray(SQLITE3_ASSOC)) {
+    $awards[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +45,8 @@
 </head>
 <body>
     <div class="container">
-        <header>Meeting</header>
-        <form action="#">
+        <header>Awards</header>
+        <form method="post" action="">
             <div class="attendance first">
                 <div class="Mark Attendance">
                     <span class="title">Awards</span>
@@ -46,7 +61,7 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Date Received</label>
-                            <input type="date" required>
+                            <input type="date" name="date_received" required>
                         </div>
                     </div>
                 </div>
@@ -55,26 +70,26 @@
                 <span class="title">Scouts</span>
                 <input type="text" id="searchInput" onkeyup="searchScouts()" placeholder="Search for scouts...">
                 <table id="scoutsTable">
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Award Received</th>
-                </tr>
-                <?php if (!empty($scouts)): ?>
-                    <?php foreach ($scouts as $scout): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($scout['FIRSTNAME']); ?></td>
-                            <td><?php echo htmlspecialchars($scout['LASTNAME']); ?></td>
-                            <td><input type="checkbox" name="award_received[]"> Yes </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
                     <tr>
-                        <td colspan="3">No scouts found.</td>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Award Received</th>
                     </tr>
-                <?php endif; ?>
+                    <?php if (!empty($scouts)): ?>
+                        <?php foreach ($scouts as $scout): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($scout['FIRSTNAME']); ?></td>
+                                <td><?php echo htmlspecialchars($scout['LASTNAME']); ?></td>
+                                <td><input type="checkbox" name="award_received[<?php echo $scout['SCOUTID']; ?>]" value="1"> Yes</td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3">No scouts found.</td>
+                        </tr>
+                    <?php endif; ?>
                 </table>
-                <button type="submit" class="addButton" disabled>
+                <button type="submit" class="addButton">
                     <span class="buttonText">Submit Awards</span>
                 </button>
             </div>
