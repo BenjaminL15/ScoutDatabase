@@ -24,6 +24,54 @@ function searchScout() {
         }
     });
 }
+function openModal(scoutId, firstName, lastName, rank, birthday) {
+    document.getElementById('editScoutId').value = scoutId;
+    document.getElementById('editFirstName').value = firstName;
+    document.getElementById('editLastName').value = lastName;
+    document.getElementById('editRank').value = rank;
+    document.getElementById('editBirthday').value = birthday;
+    document.getElementById('editModal').style.display = 'block';
+}
 
+function closeModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+function deleteScout(scoutId) {
+    if (confirm("Are you sure you want to delete this scout?")) {
+        fetch('deleteScout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'scoutId=' + encodeURIComponent(scoutId),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            showPopup('Scout successfully deleted!');
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    }
+}
+
+function showPopup() {
+    document.getElementById('popupOverlay').style.display = 'block';
+    document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup() {
+    window.location.href = 'welcomePage.php';
+}
+
+function refreshPage() {
+    window.location.reload();
+}
 document.getElementById('searchInput').addEventListener('keyup', searchScout);
 document.getElementById('dateInput').addEventListener('change', searchScout);

@@ -182,7 +182,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="popup" id="popup">
         <img src="check.png" alt="Success" class="checkmark-icon">
-        <p>Awards have been successfully submitted!</p>
+        <p>Scout have been successfully submitted!</p>
         <button class="close-btn" onclick="closePopup()">Return Home</button>
         <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
     </div>

@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="popup" id="popup">
         <img src="check.png" alt="Success" class="checkmark-icon">
-        <p>Awards have been successfully submitted!</p>
+        <p>Volunteers have been successfully submitted!</p>
         <button class="close-btn" onclick="closePopup()">Return Home</button>
         <button class="refresh-btn" onclick="refreshPage()">Stay on Page</button>
     </div>
