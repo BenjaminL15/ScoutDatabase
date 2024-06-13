@@ -26,25 +26,40 @@ INSERT INTO LOGIN (LOGINID, USERNAME, PASSWRD) VALUES
 -- Create SCOUTS table
 CREATE TABLE SCOUTS (
     SCOUTID INT IDENTITY(1,1),
+    RANKID INTEGER,
     FIRSTNAME VARCHAR(25),
     LASTNAME VARCHAR(25),
-    SCOUT_RANK VARCHAR(25),
     SCOUT_BIRTHDAY DATE,
-    PRIMARY KEY (SCOUTID)
+    PRIMARY KEY (SCOUTID),
+    FOREIGN KEY (RANKID) REFERENCES RANK(RANKID)
 );
 
 -- Insert data into SCOUTS table
-INSERT INTO SCOUTS (SCOUTID, FIRSTNAME, LASTNAME, SCOUT_RANK, SCOUT_BIRTHDAY) VALUES
-('1', 'Margaret', 'Dawson', 'Scout', '2006-03-15'),
-('2', 'Grey', 'Smith', 'First Class', '2007-04-18'),
-('3', 'Gregory', 'Howler', 'Life', '2006-08-20'),
-('4', 'Jonathan', 'Daiquri', 'Tenderfoot', '2010-08-20'),
-('5', 'Lou', 'Willis', 'Eagle', '2006-05-01'),
-('6', 'Mason', 'Park', 'Second Class', '2008-09-23'),
-('7', 'Amelia', 'Durnst', 'Star', '2009-10-21'),
-('8', 'Sarah', 'Becker', 'Life', '2011-03-06'),
-('9', 'Jennifer', 'Castillo', 'First Class', '2006-02-28'),
-('10', 'Marshall', 'Brown', 'Life', '2005-08-20');
+INSERT INTO SCOUTS (SCOUTID, FIRSTNAME, LASTNAME, RANKID, SCOUT_BIRTHDAY) VALUES
+('1', 'Margaret', 'Dawson', '1', '2006-03-15'),
+('2', 'Grey', 'Smith', '3', '2007-04-18'),
+('3', 'Gregory', 'Howler', '6', '2006-08-20'),
+('4', 'Jonathan', 'Daiquri', '2', '2010-08-20'),
+('5', 'Lou', 'Willis', '7', '2006-05-01'),
+('6', 'Mason', 'Park', '4', '2008-09-23'),
+('7', 'Amelia', 'Durnst', '5', '2009-10-21'),
+('8', 'Sarah', 'Becker', '6', '2011-03-06'),
+('9', 'Jennifer', 'Castillo', '3', '2006-02-28'),
+('10', 'Marshall', 'Brown', '6', '2005-08-20');
+
+CREATE TABLE RANK (
+    RANKID INTEGER PRIMARY KEY,
+    RANK_NAME VARCHAR(25)
+);
+
+INSERT INTO RANK (RANKID, RANK_NAME) VALUES 
+('1', 'Scout'),
+('2', 'Tenderfoot'),
+('3', 'First Class'),
+('4', 'Second Class'),
+('5', 'Star'),
+('6', 'Life'),
+('7', 'Eagle');
 
 -- Create MEETING table
 CREATE TABLE MEETING (

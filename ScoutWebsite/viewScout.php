@@ -1,13 +1,14 @@
 <?php
     $db = new SQLite3('DatabaseCreator.db');
     
-    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, s.SCOUT_RANK, s.SCOUT_BIRTHDAY, 
-            COALESCE(p.PARENT_FNAME, 'N/A') AS PARENT_FNAME, 
-            COALESCE(p.PARENT_LNAME, 'N/A') AS PARENT_LNAME, 
-            COALESCE(p.PARENTPHONE, 'N/A') AS PARENTPHONE
-        FROM SCOUTS s 
-        LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
-        LEFT JOIN PARENTS p ON sp.PARENTID = p.PARENTID AND sp.CONTACT_PRIORITY = 1";
+    $sql = "SELECT s.FIRSTNAME, s.LASTNAME, r.RANK_NAME AS SCOUT_RANK, s.SCOUT_BIRTHDAY, 
+                COALESCE(p.PARENT_FNAME, 'N/A') AS PARENT_FNAME, 
+                COALESCE(p.PARENT_LNAME, 'N/A') AS PARENT_LNAME, 
+                COALESCE(p.PARENTPHONE, 'N/A') AS PARENTPHONE
+            FROM SCOUTS s 
+            LEFT JOIN SCOUT_PARENT sp ON s.SCOUTID = sp.SCOUTID
+            LEFT JOIN PARENTS p ON sp.PARENTID = p.PARENTID AND sp.CONTACT_PRIORITY = 1
+            LEFT JOIN RANK r ON s.RANKID = r.RANKID";
 
     
     $result = $db->query($sql);

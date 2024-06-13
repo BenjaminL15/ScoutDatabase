@@ -41,6 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     echo json_encode(['success' => true]);
     exit();
 }
+
+$sql = "SELECT RANKID, RANK_NAME FROM RANK";
+$result = $db->query($sql);
+
+$ranks = [];
+while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    $ranks[] = $row;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -71,15 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                             </div>
                             <div class="input-field">
                                 <label>Rank</label>
-                                <select required>
-                                    <option value="unranked">Unranked</option>
-                                    <option value="scout">Scout</option>
-                                    <option value="tenderfoot">Tenderfoot</option>
-                                    <option value="second_class">Second Class</option>
-                                    <option value="first_class">First Class</option>
-                                    <option value="star">Star</option>
-                                    <option value="life">Life</option>
-                                    <option value="eagle">Eagle</option>
+                                <select id="rankDropdown" name="rank">
+                                    <?php foreach ($ranks as $rank): ?>
+                                        <option value="<?php echo $rank['RANKID']; ?>"><?php echo htmlspecialchars($rank['RANK_NAME']); ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="input-field">
