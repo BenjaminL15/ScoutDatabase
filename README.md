@@ -36,11 +36,17 @@ The purpose of this database was to create a website where administrators, advis
         7. After these steps are completed, you will have access to the website and the features that are offered within the website!
 
 ## USAGE
-1. When opening the project, find the **home.php** file and right click on the focused file. Tabs should be displayed, look for **PHP Server: Serve Project**. This will allow you to open the project and view the website through your local host!
+1. When opening the project, find the **home.php** file and right click on the focused file. Tabs should be displayed, look for **PHP Serve: Serve Project**. This will allow you to open the project and view the website through your local host!
 ![OpenPHP](screenshots/home.png)
 2. You can create an account that will be added to the database, or you can use an existing user account with the username **User** and password **User**. 
 3. After logging in, you will have access to all the features such as adding, viewing, editing, and deleting scouts, volunteers and marking attendance and awards as well. A display will appear when successfully removed or added to the database.
 4. Use the search input field to instantly find different scouts, awards, or volunteers at real time without any delay. This will also apply to date inputs as well.
+5. For any reason, if you are required to reset the database. You can delete the DatabaseCreator.db file and create a new DatabaseCreator.db file. 
+    - In order to do this, open your terminal and ''' cd scoutWebsite '''. 
+    - After doing that, enter this line of command ''' cat DatabaseCreator.sql | sqlite3 DatabaseCreator.db '''. 
+    - Once entered, the new DatabaseCreator.db table should be opened and can be viewed using the extension SQLite Viewer. 
+6. If you want to view other pages specifically, follow the same instruction that was told for **home.php**, however, instead of clicking **PHP Server: Serve Project**, choose **PHP Server: Reload Server** which will open the new PHP page.
+7. When finished with the server, you can right click and choose **PHP Server: Stop Server** and it will close all instances of the PHP files and will not open until **PHP Server: Serve Project** is opened again.  
 
 ## IMPROVEMENTS
 - Improvements include:
