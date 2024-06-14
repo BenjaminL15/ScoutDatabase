@@ -1,6 +1,6 @@
 # Scout Database
 
-The purpose of this database was to create a website where administrators, advisors, or leaders of scouts could view existing scouts, awards, and volunteers while also allowing them to add new scouts (with details such as rank, birthday, parent info), add new volunteers (volunteer information and associating them as merit badge counselors or parents of scouts), and also tracking/marking attendance for meetings that scouts did or did not attend. This website was created to help users stay on track of their scouts while also planning based on the different queries that appear to the users.
+The purpose of this database is to create a website where administrators, advisors, or leaders of scouts can view existing scouts, awards, and volunteers. It also allows them to add new scouts (including details such as rank, birthday, and parent information), add new volunteers (with volunteer information and the ability to associate them as merit badge counselors or parents of scouts), and track/record attendance for meetings attended or missed by scouts. This website was designed to help users stay on track with their scouts, enabling effective planning based on the various queries available to users.
 
 ## Table of Contents
 - [Installation](#installation)
