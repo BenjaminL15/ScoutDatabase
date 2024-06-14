@@ -16,7 +16,7 @@ The purpose of this database is to create a website where administrators, adviso
         - **[PHP Server - Brapifra](https://marketplace.visualstudio.com/items?itemName=brapifra.phpserver)**: Used to view the php files (more information on this later on)
 
 2. **XAMPP Installation & Setup**
-**DISCLAIMER: THIS SETUP AND INSTALLATION IS FOR WINDOWS SYSTEMS**
+    **DISCLAIMER: THIS SETUP AND INSTALLATION IS FOR WINDOWS SYSTEMS**
     - In order to view the servers, you need XAMPP which is a PHP development environment that we used to open and create our database.
         - **[XAMPP - Apache Friends](https://www.apachefriends.org/)**: It should redirect you and automatically download the program onto your computer. 
             - [Installation Guide Video](https://www.youtube.com/watch?v=VCHXCusltqI&ab_channel=GeekyScript): If you prefer a video guide, you can watch this installation guide on YouTube for a step-by-step process.
@@ -34,7 +34,13 @@ The purpose of this database is to create a website where administrators, adviso
         6. Depending on your system, a large notepad will appear wth several lines of writing that we commented out by **;**. We want to press **CTRL + F** and type **"extension=sqlite3**. Press **Find Next** and it will direct us to the specific line of code. Once we have found it, remove the **;** from the line. Save the configuration and exit the notepad.
         ![SQLite3](screenshots/sqlite.png)
         7. After these steps are completed, you will have access to the website and the features that are offered within the website!
-
+        **INSTALLATION FOR macOS SYSTEMS**
+    1. Install homebrew, this should only be one command within the terminal, however, for more information you can find on their website **[Homebrew](https://brew.sh/)**.
+        - ` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
+    2. After installing homebrew, open the terminal and enter the following command:
+        - `brew install php`
+    3. Once installed (it might take a few minutes), you will be able to follow the next steps to opening the website in [Usage](#usage)!
+    
 ## USAGE
 1. When opening the project, find the **home.php** file and right click on the focused file. Tabs should be displayed, look for **PHP Serve: Serve Project**. This will allow you to open the project and view the website through your local host!
 ![OpenPHP](screenshots/home.png)
