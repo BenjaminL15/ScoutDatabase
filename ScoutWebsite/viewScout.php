@@ -131,7 +131,7 @@
     </div>
     <div class="popup-overlay" id="confirmPopupOverlay"></div>
     <div class="popup" id="confirmPopup">
-        <p>Are you sure you want to delete this volunteer?</p>
+        <p>Are you sure you want to delete this scout?</p>
         <button class="confirm-btn" onclick="deleteScout()">Yes</button>
         <button class="cancel-btn" onclick="closeConfirmPopup()">No</button>
     </div>
